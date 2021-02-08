@@ -48,14 +48,14 @@ class Menu:
                         True    
             #----------------------------------------------------------------------
                 elif opcionint==2:                           #devolver objetos
-                    Menu.limpiar()
+                    self.limpiar()
                     print('Que deseas regresar')
                     print("1.- Balon de Futbol")
                     print("2.- Balon de Basquetball")
                     print("3.- Pelota de tenis")  
                     print("0.- Salir")  
                     opc=int(input('->'))
-                    Menu.limpiar()
+                    self.limpiar()
                     tmp=Articulo()
                     c=1
                     if opc==1:
@@ -153,7 +153,8 @@ class Menu:
                     elif opc==7:
                         MongoDatabase.crearTabla()
                     elif opc==8:
-                        MongoDatabase.insertarDatosPrueba()
+                        x=MongoDatabase()
+                        x.insertarDatosPrueba()
 
 
 
@@ -188,7 +189,11 @@ class Menu:
     def RegistrarArticulo(self,matricula,articulo,cantidad):
         tmp=Articulo()
         tmp.RegistroArticulo(matricula,articulo,cantidad)
-        self.masterBD(self.dbActual, matricula,articulo,cantidad)
+        x=int(self.dbActual)
+        if x==1:
+            MysqlDatabase.insertarDatos(matricula,articulo,cantidad)
+        elif x==2:
+            MongoDatabase.insertarDatos(matricula,articulo,cantidad)
 
     def VerInventario(self):
         print("------------------------------------------------------------------")
@@ -206,33 +211,6 @@ class Menu:
         tmp=Articulo()
         tmp.DevolucionesPrestamos()
 
-    def masterBD(self,BDNum,matricula,articulo,cantidad):
-
-        print("entroRegistro1")
-        if(BDNum==1):
-            tmp=MysqlDatabase()
-            tmp.insertarDatos(matricula,articulo,cantidad)
-            print("Entro BD 1")
-        elif(BDNum==2):
-            BD=MongoDatabase()
-            BD.insertarDatos(matricula,articulo,cantidad)
-            print("Entro BD 2")
-
-
-
-
-
-        opc=input("-> ")
-        if (opc=="1"):
-            x=1
-            self.dbActual=x
-            print("Se a predeterminado Mysql")
-            print("")
-        elif(opc=="2"):
-            x=2
-            self.dbActual=x
-            print("Se a predeterminado MongoDB")
-            print("")
 
 
 if __name__ == "__main__":

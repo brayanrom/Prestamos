@@ -41,7 +41,7 @@ class MysqlDatabase():
         print("")
         print("")
 
-    def insertarDatos(x,y,z): #solo para pruebas
+    def insertarDatos(matricula,articulo,cantidad): #solo para pruebas
         mydb = mysql.connector.connect(
         host="localhost",
         user="root",
@@ -50,7 +50,7 @@ class MysqlDatabase():
         )
         mycursor = mydb.cursor()
         sql = "INSERT INTO historial (matricula, articulo, cantidad) VALUES (%s, %s, %s)"
-        val = (x,y,z)
+        val = (matricula,articulo,cantidad)
         mycursor.execute(sql, val)
         mydb.commit()
         print(mycursor.rowcount, "datos insertado.")
