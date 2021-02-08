@@ -1,0 +1,9 @@
+{
+    "ListaPrestamos": [
+        {
+            "matricula": "18888887",
+            "articulo": "Pelota de tenis",
+            "cantidad": 111
+        }
+    ]
+}
